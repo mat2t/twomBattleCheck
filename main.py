@@ -1,16 +1,22 @@
-from minstrul import Minstrul, CreateMinstrul, StatBudget
+from minstrul import Minstrul, CreateMinstrul, StatBudget, Faction, FACTION_EFFECTIVENESS
 from minstrul.archetypes import Archetype
 
 
 def calcDamage(movePwr: int, attacker: Minstrul, defender: Minstrul, hasStab: bool) -> int:
-    # TODO add effective multiplier e.g. super, neutral, resist (1.25, 1, 0.75)
     stab = 1.25 if hasStab else 1
+    effectiveness = getEffectiveness(attacker, defender.faction)
 
-    return int(movePwr * (attacker.attack / defender.defence) * (attacker.level / 50 + 1) * stab)
+    return int(movePwr * (attacker.attack / defender.defence)
+               * (attacker.level / 50 + 1) 
+               * stab 
+               * effectiveness)
 
-hippo = CreateMinstrul("Mini Hippo Bro", 10, Archetype.TANK, StatBudget.STAGE1)
-cat = CreateMinstrul("Tigo", 10, Archetype.SPEEDSTER, StatBudget.STAGE1)
+def getEffectiveness(attacker: Minstrul, defender: Minstrul) -> float:
+    return FACTION_EFFECTIVENESS.get(attacker.faction, {}).get(defender.faction, 1.0)
 
+
+hippo = CreateMinstrul("Chungus", Faction.AQUATIC, 10, Archetype.TANK, StatBudget.STAGE1)
+cat = CreateMinstrul("Tigo", Faction.UNDEAD, 10, Archetype.SPEEDSTER, StatBudget.STAGE1)
 
 print(hippo)
 print("\nVS\n")

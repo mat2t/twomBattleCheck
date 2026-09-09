@@ -2,8 +2,9 @@ from minstrul.statBudget import StatBudget
 
 class Minstrul:
 
-    def __init__(self, nickname: str, level: int, statBudget: StatBudget, statModifiers: list[float]):
+    def __init__(self, nickname: str, faction: Faction, level: int, statBudget: StatBudget, statModifiers: list[float]):
         self.nickname = nickname
+        self.faction = faction
         self.level = level
         
         self._statbudget = statBudget
@@ -34,6 +35,7 @@ class Minstrul:
     def __str__(self) -> str:
         return (
             f"--- {self.nickname} (Lv. {self.level}) ---\n"
+            f"Faction: {self.faction.value}\n"
             f"HP:      {self.currentHealth} / {self.health}\n"
             f"Attack:  {self.attack}\n"
             f"Defence: {self.defence}\n"

@@ -1,4 +1,4 @@
-from minstrul.minstrul import Minstrul, StatBudget
+from minstrul.minstrul import Minstrul, StatBudget, Faction
 from minstrul.archetypes import *
 
 
@@ -11,9 +11,10 @@ class MinstrulFactory:
         }
 
     @classmethod
-    def CreateMinstrul(self, nickname: str, level: int, archetype: Archetype, statBudget: StatBudget) -> Minstrul:
+    def CreateMinstrul(self, nickname: str, faction: Faction, level: int, archetype: Archetype,
+                       statBudget: StatBudget) -> Minstrul:
         if archetype not in self._registry:
             raise ValueError(f"Unknown type: {archetype}")
             
         minstrul = self._registry[archetype]
-        return minstrul(nickname, level, statBudget)
+        return minstrul(nickname, faction, level, statBudget)
