@@ -4,7 +4,7 @@ from minstrul.archetypes import Archetype
 
 def calcDamage(movePwr: int, attacker: Minstrul, defender: Minstrul, hasStab: bool) -> int:
     stab = 1.25 if hasStab else 1
-    effectiveness = getEffectiveness(attacker, defender.faction)
+    effectiveness = getEffectiveness(attacker, defender)
 
     return int(movePwr * (attacker.attack / defender.defence)
                * (attacker.level / 50 + 1) 
