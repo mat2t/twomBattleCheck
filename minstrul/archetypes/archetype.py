@@ -1,7 +1,7 @@
 from enum import Enum
 
 class Archetype(Enum):
-    BALANCED = 1
-    CANNON = 2
-    TANK = 3
-    SPEEDSTER = 4
+    BALANCED = 0
+    CANNON = 1
+    TANK = 2
+    SPEEDSTER = 3
